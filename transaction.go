@@ -376,9 +376,8 @@ func NewTransaction(instructions []Instruction, recentBlockHash Hash, opts ...Tr
 		}
 
 		addressLookupKeyEntry, isPresentedInTables := addressLookupKeysMap[acc.PublicKey]
-		_, isInvoked := programIDsMap[acc.PublicKey]
 		// skip fee payer
-		if isPresentedInTables && idx != 0 && !acc.IsSigner && !isInvoked {
+		if isPresentedInTables && idx != 0 && !acc.IsSigner {
 			lookup := lookupsMap[addressLookupKeyEntry.addressTable]
 			if acc.IsWritable {
 				lookup.WritableIndexes = append(lookup.WritableIndexes, addressLookupKeyEntry.index)
